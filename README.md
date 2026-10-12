@@ -100,7 +100,6 @@ local UICorner = Instance.new("UICorner")
 UICorner.CornerRadius = UDim.new(0, 8)
 UICorner.Parent = ToggleButton
 
--- Tiêu đề: "TP TO ALL"
 local MainTitle = Instance.new("TextLabel")
 MainTitle.Name = "MainTitle"
 MainTitle.Size = UDim2.new(1, 0, 0, 22)
@@ -112,7 +111,6 @@ MainTitle.TextSize = 15
 MainTitle.Font = Enum.Font.SourceSansBold
 MainTitle.Parent = ToggleButton
 
--- Cre Dòng 1: "cre by: Hailan1219"
 local SubTitle1 = Instance.new("TextLabel")
 SubTitle1.Name = "SubTitle1"
 SubTitle1.Size = UDim2.new(1, 0, 0, 14)
@@ -125,7 +123,6 @@ SubTitle1.TextSize = 11
 SubTitle1.Font = Enum.Font.SourceSans
 SubTitle1.Parent = ToggleButton
 
--- Cre Dòng 2: "tiktok: @stormchasers_vn"
 local SubTitle2 = Instance.new("TextLabel")
 SubTitle2.Name = "SubTitle2"
 SubTitle2.Size = UDim2.new(1, 0, 0, 14)
@@ -139,7 +136,7 @@ SubTitle2.Font = Enum.Font.SourceSans
 SubTitle2.Parent = ToggleButton
 
 -------------------------------------------------------------------
--- 3. LOGIC TELEPORT
+-- 3. LOGIC TELEPORT (ĐÃ TĂNG TỐC GẤP 3)
 -------------------------------------------------------------------
 local isRunning = false
 
@@ -147,7 +144,7 @@ local function teleportLoop()
 	while isRunning do
 		local currentCharacter = LocalPlayer.Character
 		if not currentCharacter or not currentCharacter:FindFirstChild("HumanoidRootPart") then
-			task.wait(0.03)
+			task.wait()
 			continue
 		end
 		
@@ -158,7 +155,7 @@ local function teleportLoop()
 			humanoid.PlatformStand = true
 			humanoid.AutoRotate = false
 		else
-			task.wait(0.03)
+			task.wait()
 			continue
 		end
 		
@@ -179,12 +176,12 @@ local function teleportLoop()
 					myRootPart.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
 					myRootPart.AssemblyAngularVelocity = Vector3.new(0, 0, 0)
 					
-					task.wait(0.03)
+					task.wait(0.01) -- Giảm thời gian chờ giữa các người chơi
 				end
 			end
 		end
 		
-		task.wait(0.03)
+		task.wait(0.01)
 	end
 	
 	if LocalPlayer.Character then
@@ -216,7 +213,6 @@ UserInputService.InputChanged:Connect(function(input)
 	if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
 		local delta = input.Position - dragStart
 		
-		-- Nếu di chuyển chuột/tay quá 5 pixel thì xác định là đang kéo nút
 		if (math.abs(delta.X) > 5 or math.abs(delta.Y) > 5) then
 			isMoved = true
 		end
@@ -237,7 +233,6 @@ ToggleButton.InputEnded:Connect(function(input)
 		if dragging then
 			dragging = false
 			
-			-- Nếu không di chuyển (chỉ nhấp vào) thì mới bật/tắt script
 			if not isMoved then
 				isRunning = not isRunning
 				
